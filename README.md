@@ -1,4 +1,6 @@
-# Qwik City App ⚡️
+# Yano
+
+## Patrick's qwik piano webapp
 
 - [Qwik Docs](https://qwik.builder.io/)
 - [Discord](https://qwik.builder.io/chat)
