@@ -1,7 +1,8 @@
 .footer {
-  color: var(--qwik-dark-text);
-  background-color: lime;
-  height: 5vh;
-  padding: 1em;
-  text-align: right;
+  background-color: var(--qwik-dark-blue);
+  height: 50px;
+  padding-right: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

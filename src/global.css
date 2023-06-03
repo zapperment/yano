@@ -37,6 +37,10 @@ body {
   padding: 0;
 }
 
+a {
+  color: var(--qwik-light-blue)
+}
+
 main {
   flex-grow: 1;
   display: flex;

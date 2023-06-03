@@ -1,8 +1,11 @@
 .header {
-  height: 10vh;
-  background-color: hotpink;
+  height: 100px;
+  background-color: var(--qwik-dark-purple);
+  display: flex;
+  align-items: center;
+  padding-left: 2em;
 }
 
 .logo {
-  padding-left: 1em;
+  margin: 0;
 }
