@@ -40,3 +40,7 @@ lerna-debug.log*
 
 # IntelliJ
 .idea
+
+# Don't sync the flash card photos
+# to Git, the files are too big
+/public/images/flash-cards/*.png
