@@ -1,0 +1,19 @@
+﻿@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.icon {
+  font-size: 60px;
+  position: absolute;
+  top: 20px;
+  right: 15px;
+}
+
+.fadeOut {
+  /*animation: fade 1s linear forwards;*/
+}
