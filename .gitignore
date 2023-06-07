@@ -3,6 +3,7 @@
 /lib
 /lib-types
 /server
+/out
 
 # Development
 node_modules
@@ -37,9 +38,6 @@ lerna-debug.log*
 # Yarn
 .yarn/*
 !.yarn/releases
-
-# IntelliJ
-.idea
 
 # Don't sync the flash card photos
 # to Git, the files are too big
