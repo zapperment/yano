@@ -1,8 +1,4 @@
 ﻿import { component$ } from "@builder.io/qwik";
-import styles from "./success.module.css";
+import Emoji from "../emoji";
 
-export default component$(() => (
-  <span class={[styles.icon, styles.fadeOut]} role="img" aria-label="thumbs up">
-    👍
-  </span>
-));
+export default component$(() => <Emoji symbol={"👍"} ariaLabel="thumbs up" />);

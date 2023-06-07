@@ -1,12 +1,6 @@
 ﻿import { component$ } from "@builder.io/qwik";
-import styles from "./failure.module.css";
+import Emoji from "../emoji";
 
 export default component$(() => (
-  <span
-    class={[styles.icon, styles.fadeOut]}
-    role="img"
-    aria-label="thumbs down"
-  >
-    👎
-  </span>
+  <Emoji symbol={"👎"} ariaLabel="thumbs down" />
 ));

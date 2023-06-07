@@ -1,13 +1,12 @@
 /* eslint-disable qwik/jsx-img */
-import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
+import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import type { Signal } from "@builder.io/qwik";
 
 import styles from "./flash-card.module.css";
 import { getRandomItem, getFlashCards } from "./utils";
+// @ts-ignore (I have no idea why TypeScript thinks there is no index.d.ts in the webmidi package)
 import type { MIDIMessageEvent, MIDIAccess } from "webmidi";
-import { Success } from "~/components/emojis/success";
-import { Failure } from "~/components/emojis/failure";
-import getNoteNameFromNumber from "~/routes/flash-card/utils/getNoteNameFromNumber";
+import { Success, Failure } from "~/components/emojis";
 
 export const flashCardCodes = [
   "a2",
@@ -32,13 +31,27 @@ type Result = {
   card: number;
   success: boolean;
   notes: string;
-  wrongNote?: string;
+  time: number;
 };
 
 export default component$(() => {
   const results: Signal<Result[]> = useSignal([]);
   const flashCard = useSignal(getNextFlashCard());
   const notesToGuess = useSignal([...flashCard.value.noteNumbers]);
+  const timer = useSignal(Date.now());
+
+  const handleResult = $(function handleResult(success: boolean) {
+    results.value.push({
+      card: results.value.length + 1,
+      success,
+      notes: flashCard.value.noteNames,
+      time: Date.now() - timer.value,
+    });
+    console.log("[PH_LOG] results:", results.value); // PH_TODO
+    flashCard.value = getNextFlashCard();
+    notesToGuess.value = [...flashCard.value.noteNumbers];
+    timer.value = Date.now();
+  });
 
   useVisibleTask$(async () => {
     function handleMidiMessage(event: MIDIMessageEvent) {
@@ -53,25 +66,10 @@ export default component$(() => {
         const index = notesToGuess.value.indexOf(note);
         notesToGuess.value.splice(index, 1);
         if (notesToGuess.value.length === 0) {
-          results.value.push({
-            card: results.value.length + 1,
-            success: true,
-            notes: flashCard.value.noteNames,
-          });
-          console.log("[PH_LOG] results:", results.value); // PH_TODO
-          flashCard.value = getNextFlashCard();
-          notesToGuess.value = [...flashCard.value.noteNumbers];
+          handleResult(true);
         }
       } else {
-        results.value.push({
-          card: results.value.length + 1,
-          success: false,
-          notes: flashCard.value.noteNames,
-          wrongNote: getNoteNameFromNumber(note),
-        });
-        console.log("[PH_LOG] results:", results.value); // PH_TODO
-        flashCard.value = getNextFlashCard();
-        notesToGuess.value = [...flashCard.value.noteNumbers];
+        handleResult(false);
       }
     }
 

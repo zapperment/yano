@@ -1,1 +1,2 @@
-﻿export { default as Failure } from "./Failure";
+﻿import Failure from "./Failure";
+export default Failure;
