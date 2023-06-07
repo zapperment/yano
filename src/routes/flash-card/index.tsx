@@ -7,21 +7,10 @@ import { getRandomItem, getFlashCards } from "./utils";
 // @ts-ignore (I have no idea why TypeScript thinks there is no index.d.ts in the webmidi package)
 import type { MIDIMessageEvent, MIDIAccess } from "webmidi";
 import { Success, Failure } from "~/components/emojis";
-
-export const flashCardCodes = [
-  "a2",
-  "a3",
-  "a4-c#5-e5",
-  "a4-d5-f#5",
-  "c#3",
-  "d3",
-  "e3",
-  "f#3",
-];
+import type { DocumentHead } from "@builder.io/qwik-city";
+import { flashCardCodes } from "~/config";
 
 const flashCards = getFlashCards(flashCardCodes);
-
-console.log("[PH_LOG] flashCards:", flashCards); // PH_TODO
 
 function getNextFlashCard() {
   return getRandomItem(flashCards);
@@ -105,3 +94,13 @@ export default component$(() => {
     </>
   );
 });
+
+export const head: DocumentHead = {
+  title: "Yano",
+  meta: [
+    {
+      name: "description",
+      content: "Patrick's qwik piano webapp",
+    },
+  ],
+};
