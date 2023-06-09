@@ -1,9 +1,14 @@
 .footer {
   background-color: var(--qwik-dark-blue);
-  height: 50px;
   padding-right: 1em;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   font-weight: 200;
+  grid-column: 1 / -1;
+  grid-row: 3;
+}
+
+.footer a {
+  color: #fff;
 }

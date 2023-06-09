@@ -4,7 +4,9 @@ import styles from "./header.module.css";
 export default component$(() => {
   return (
     <header class={styles.header}>
-      <h1 class={styles.logo}>Yano</h1>
+      <h1 class={styles.logo}>
+        <a href="/">Yano</a>
+      </h1>
     </header>
   );
 });

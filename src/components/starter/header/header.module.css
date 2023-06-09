@@ -1,11 +1,24 @@
 .header {
-  height: 100px;
   background-color: var(--qwik-dark-purple);
-  display: flex;
-  align-items: center;
-  padding-left: 2em;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: var(--grid-columns);
 }
 
 .logo {
   margin: 0;
+  grid-column: 1;
+  grid-row: 1;
+  background-color: rgba(0,0,0,0.2);
+  font-size: 70px;
+  display: flex;
+  padding-top: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo a {
+  text-decoration: none;
+  color: #fff;
 }
