@@ -9,11 +9,12 @@ import type { MIDIMessageEvent, MIDIAccess } from "webmidi";
 import { Success, Failure } from "~/components/emojis";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { flashCardCodes } from "~/config";
+import type { FlashCard } from "~/types";
 
 const flashCards = getFlashCards(flashCardCodes);
 
-function getNextFlashCard() {
-  return getRandomItem(flashCards);
+function getNextFlashCard(prevFlashCard?: FlashCard) {
+  return getRandomItem(flashCards, prevFlashCard);
 }
 
 type Result = {
@@ -37,7 +38,7 @@ export default component$(() => {
       time: Date.now() - timer.value,
     });
     console.log("[PH_LOG] results:", results.value); // PH_TODO
-    flashCard.value = getNextFlashCard();
+    flashCard.value = getNextFlashCard(flashCard.value);
     notesToGuess.value = [...flashCard.value.noteNumbers];
     timer.value = Date.now();
   });
