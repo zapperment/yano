@@ -1,1 +1,2 @@
-export type { FlashCard } from "./FlashCard";
+export * from "./FlashCard";
+export * from "./MetaData";

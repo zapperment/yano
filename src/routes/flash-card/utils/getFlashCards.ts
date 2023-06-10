@@ -5,6 +5,7 @@ import getPieceName from "~/routes/flash-card/utils/getPieceName";
 import getBar from "~/routes/flash-card/utils/getBar";
 import type { FlashCard } from "~/types";
 import getHand from "./getHand";
+import getStep from "./getStep";
 
 export default function getFlashCards(flashCardCodes: string[]): FlashCard[] {
   const flashCards = flashCardCodes.map((code) => ({
@@ -14,6 +15,7 @@ export default function getFlashCards(flashCardCodes: string[]): FlashCard[] {
     hand: getHand(code),
     piece: getPieceName(code),
     bar: getBar(code),
+    step: getStep(code),
   }));
   console.log(flashCards);
   return flashCards;

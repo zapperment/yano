@@ -4,3 +4,4 @@ export { default as getHand } from "./getHand";
 export { default as getNoteNames } from "./getNoteNames";
 export { default as getNoteNumbers } from "./getNoteNumbers";
 export { default as getRandomItem } from "./getRandomItem";
+export { default as getStep } from "./getStep";
