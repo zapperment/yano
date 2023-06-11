@@ -5,7 +5,7 @@ import { useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import type { Signal } from "@builder.io/qwik";
 
 import type { FlashCard, Result } from "~/types";
-import { getFlashCards, getRandomItem } from "../utils";
+import { getFlashCards, getRandomItem } from "~/routes/training-session/utils"
 import { flashCardCodes } from "~/config";
 
 const flashCards = getFlashCards(flashCardCodes);
