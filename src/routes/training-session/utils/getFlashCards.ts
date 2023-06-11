@@ -1,8 +1,8 @@
 ﻿import getFilePath from "./getFilePath";
 import getNoteNames from "./getNoteNames";
 import getNoteNumbers from "./getNoteNumbers";
-import getPieceName from "~/routes/flash-card/utils/getPieceName";
-import getBar from "~/routes/flash-card/utils/getBar";
+import getPieceName from "./getPieceName"
+import getBar from "./getBar"
 import type { FlashCard } from "~/types";
 import getHand from "./getHand";
 import getStep from "./getStep";

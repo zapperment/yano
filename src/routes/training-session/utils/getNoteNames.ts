@@ -1,4 +1,4 @@
-﻿import formatNote from "~/routes/flash-card/utils/formatNote";
+﻿import formatNote from "./formatNote"
 
 export default function getNoteNames(code: string) {
   const [, , ,notesCode] = code.split("_");

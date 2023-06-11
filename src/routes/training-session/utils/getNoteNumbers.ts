@@ -1,10 +1,10 @@
 ﻿import notes from "./notes";
-import formatNote from "~/routes/flash-card/utils/formatNote";
+import formatNote from "./formatNote";
 
 const regExp = /^([a-g][bs]?)(-?[0-9])(\.[0-9]+)?/;
 
 export default function getNoteNumbers(code: string) {
-  const [, , ,notesCode] = code.split("_");
+  const [, , , notesCode] = code.split("_");
   const codeParts = notesCode.split("-");
   return codeParts.map((codePart) => {
     const noteCode = codePart.replace(regExp, "$1");

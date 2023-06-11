@@ -1,15 +1,12 @@
-/* eslint-disable qwik/jsx-img */
-import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
+﻿// @ts-ignore (I have no idea why TypeScript thinks there is no index.d.ts in the webmidi package)
+import type { MIDIMessageEvent, MIDIAccess } from "webmidi";
+import { $ } from "@builder.io/qwik";
+import { useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import type { Signal } from "@builder.io/qwik";
 
-import styles from "./flash-card.module.css";
-import { getRandomItem, getFlashCards } from "./utils";
-// @ts-ignore (I have no idea why TypeScript thinks there is no index.d.ts in the webmidi package)
-import type { MIDIMessageEvent, MIDIAccess } from "webmidi";
-import { Success, Failure } from "~/components/emojis";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import type { FlashCard, Result } from "~/types";
+import { getFlashCards, getRandomItem } from "../utils";
 import { flashCardCodes } from "~/config";
-import type { FlashCard } from "~/types";
 
 const flashCards = getFlashCards(flashCardCodes);
 
@@ -17,14 +14,7 @@ function getNextFlashCard(prevFlashCard?: FlashCard) {
   return getRandomItem(flashCards, prevFlashCard);
 }
 
-type Result = {
-  card: number;
-  success: boolean;
-  notes: string;
-  time: number;
-};
-
-export default component$(() => {
+export default function useTrainingSession() {
   const results: Signal<Result[]> = useSignal([]);
   const flashCard = useSignal(getNextFlashCard());
   const notesToGuess = useSignal([...flashCard.value.noteNumbers]);
@@ -32,12 +22,11 @@ export default component$(() => {
 
   const handleResult = $(function handleResult(success: boolean) {
     results.value.push({
-      card: results.value.length + 1,
+      attempt: results.value.length + 1,
       success,
-      notes: flashCard.value.noteNames,
+      flashCard: flashCard.value,
       time: Date.now() - timer.value,
     });
-    console.log("[PH_LOG] results:", results.value); // PH_TODO
     flashCard.value = getNextFlashCard(flashCard.value);
     notesToGuess.value = [...flashCard.value.noteNumbers];
     timer.value = Date.now();
@@ -75,33 +64,8 @@ export default component$(() => {
     }
   });
 
-  return (
-    <>
-      <img
-        alt={flashCard.value.noteNames}
-        class={styles.flashCard}
-        src={flashCard.value.file}
-      />
-      {results.value
-        .slice(-10)
-        .reverse()
-        .map(({ card, success }) =>
-          success ? (
-            <Success key={`card${card}`} />
-          ) : (
-            <Failure key={`card${card}`} />
-          )
-        )}
-    </>
-  );
-});
-
-export const head: DocumentHead = {
-  title: "Yano",
-  meta: [
-    {
-      name: "description",
-      content: "Patrick's qwik piano webapp",
-    },
-  ],
-};
+  return {
+    flashCard,
+    results,
+  };
+}

@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import styles from "./emoji.module.css";
+import styles from "./Emoji.module.css";
 
 type Props = {
   symbol: string;
