@@ -1,6 +1,4 @@
 ﻿/* eslint-disable qwik/jsx-img */
-import { component$ } from "@builder.io/qwik";
-
 import styles from "./TrainingSessionPage.module.css";
 import { Success, Failure } from "~/components/emojis";
 import type { FlashCard, Result } from "~/types";
